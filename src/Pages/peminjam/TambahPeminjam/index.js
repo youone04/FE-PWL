@@ -1,42 +1,50 @@
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
-const EditBuku = () => {
+const DataPeminjam = (props) => {
+  function generateID(number) {
+    if (number.toString().length === 2) {
+      return `A00${number + 1}`;
+    } else if (number.toString().length === 3) {
+      return `A0${number + 1}`;
+    } else if (number.toString().length === 4) {
+      return `A${number + 1}`;
+    }
+    return `A000${number + 1}`;
+  }
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm();
 
-  const navigate = useNavigate();
-  const { state } = useLocation();
-  const { id, nama_buku, jumlah_buku } = state;
-
-  useEffect(() => {
-    setValue("nama_buku", nama_buku);
-    setValue("jumlah_buku", jumlah_buku);
-  }, []);
-
   const onSubmit = async (data) => {
-    const dataSend = {
-      ...data,
-      id,
-    };
     try {
-      const result = await fetch(`${process.env.REACT_APP_API}/api/buku`, {
-        method: "PUT",
+      const token = localStorage.getItem("token");
+      const decoded = jwt_decode(token);
+      const admin_id = decoded.id;
+      const id = generateID(props.data.length);
+      const dataSend = {
+        ...data,
+        id,
+        admin_id,
+      };
+
+      const result = await fetch(`${process.env.REACT_APP_API}/api/peminjam`, {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           // Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(dataSend),
       });
+
       const hasil = await result.json();
       if (hasil.status === 200) {
-        navigate("/manage-buku");
+        navigate("/manage-peminjam");
         swal("success", hasil.message, "success");
       } else {
         swal("failed", hasil.message, "warning");
@@ -78,50 +86,54 @@ const EditBuku = () => {
               <div className="col-md-12">
                 <div className="card card-primary">
                   <div className="card-header">
-                    <h3 className="card-title">Data Buku</h3>
+                    <h3 className="card-title">Data Peminjam</h3>
                   </div>
                   <form onSubmit={handleSubmit(onSubmit)} id="quickForm">
                     <div className="card-body">
                       <div className="form-group">
-                        <label htmlFor="id-buku">ID BUKU</label>
+                        <label htmlFor="id-buku">ID Peminjam</label>
                         <input
                           type="text"
                           name="id-buku"
                           className="form-control"
                           id="id-buku"
-                          value={id}
+                          value={generateID(props.data.length)}
                           placeholder="ID"
                           disabled
                         />
                       </div>
                       <div className="form-group">
-                        <label htmlFor="nama-buku">Nama Buku</label>
+                        <label htmlFor="nama-peminjam">Nama Peminjam</label>
                         <input
                           type="text"
-                          name="nama buku"
+                          name="nama peminjam"
                           className="form-control"
-                          id="nama-buku"
-                          placeholder="Buku"
-                          {...register("nama_buku", { required: true })}
+                          id="nama-peminjam"
+                          placeholder="Peminjam"
+                          {...register("nama_peminjam", { required: true })}
                         />
-                        {errors.nama_buku && <p>Nama buku is required.</p>}
+                        {errors.nama_buku && <p>Naa Peminjam is required.</p>}
                       </div>
+
+
+
+
                       <div className="form-group">
-                        <label htmlFor="nama-buku">Jumlah Buku</label>
+                        <label htmlFor="alamat">Alamat</label>
                         <input
                           type="text"
-                          name="jumlah buku"
+                          name="alamat"
                           className="form-control"
-                          id="jumlah-buku"
-                          placeholder="Jumlah"
-                          {...register("jumlah_buku", { required: true })}
+                          id="alamat"
+                          placeholder="Alamat"
+                          {...register("alamat", { required: true })}
                         />
-                        {errors.jumlah_buku && <p>Jumlah buku is required.</p>}
+                        {errors.alamat && <p>alamat is required.</p>}
                       </div>
                     </div>
                     <div className="card-footer">
                       <button type="submit" className="btn btn-primary">
-                        SIMPAN
+                        <i className="fas fa-save mr-2"></i>SIMPAN
                       </button>
                       <button
                         type="button"
@@ -129,7 +141,7 @@ const EditBuku = () => {
                         className="btn btn-success"
                         style={{ marginLeft: 5 }}
                       >
-                        KEMBALI
+                        <i className="fas fa-arrow-right mr-2"></i>KEMBALI
                       </button>
                     </div>
                   </form>
@@ -143,4 +155,4 @@ const EditBuku = () => {
     </>
   );
 };
-export default EditBuku;
+export default DataPeminjam;

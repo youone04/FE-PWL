@@ -7,9 +7,10 @@ import Login from "./Pages/Login";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Table from "./Components/Admin/Table";
 import ProtectedRoutes from "./config/ProtectedRoutes";
-import ManageBuku from "./Pages/ManageBuku";
-import TambahBuku from "./Pages/TambahBuku";
-import EditBuku from "./Pages/EditBuku";
+import ManageBuku from "./Pages/buku/ManageBuku";
+import TambahBuku from "./Pages/buku/TambahBuku";
+import EditBuku from "./Pages/buku/EditBuku";
+import ManagePeminjam from "./Pages/peminjam/ManagePeminjam";
 function App() {
   const location = useLocation();
   const position = location.pathname !== "/";
@@ -30,6 +31,8 @@ function App() {
           <Route exact path="/manage-buku" element={<ManageBuku />} />
           <Route exact path="/tambah-buku" element={<TambahBuku />} />
           <Route exact path="/edit-buku" element={<EditBuku />} />
+
+          <Route exact path="/manage-anggota" element={<ManagePeminjam />} />
         </Route>
       </Routes>
       {position && <Footer />}

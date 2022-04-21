@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { getBuku } from "../../config/redux/actions/getBuku";
+import { getBuku } from "../../../config/redux/actions/getBuku";
 import { useEffect } from 'react';
 import DataBuku from "./DataBuku";
 

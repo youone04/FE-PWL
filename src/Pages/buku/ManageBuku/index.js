@@ -1,7 +1,7 @@
 import Table from "./Table";
 import { useSelector, useDispatch } from "react-redux";
-import { getBuku } from "../../config/redux/actions/getBuku";
-import { auth } from "../../config/redux/actions/authAction";
+import { getBuku } from "../../../config/redux/actions/getBuku";
+import { auth } from "../../../config/redux/actions/authAction";
 import { useEffect } from "react";
 import swal from "sweetalert";
 
@@ -28,7 +28,7 @@ const ManageBuku = () => {
           const result = await fetch(
             `${process.env.REACT_APP_API}/api/buku/${id}`,
             {
-              method: "PUT",
+              method: "DELETE",
               headers: {
                 "Content-Type": "application/json",
                 // Authorization: `Bearer ${token}`,
@@ -36,10 +36,10 @@ const ManageBuku = () => {
             }
           );
 
-          const hasil = result.json();
-          console.log(hasil)
+          const hasil = await result.json();
+          console.log(hasil);
           if (hasil.status === 200) {
-             dispatch(getBuku());
+            dispatch(getBuku());
             swal("Success", hasil.message, "success");
           } else {
             swal("Failed", hasil.message, "error");

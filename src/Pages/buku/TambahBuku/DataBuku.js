@@ -1,11 +1,16 @@
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
 const DataBuku = (props) => {
   function generateID(number) {
-    if (number.toString().length > 1) {
+    if (number.toString().length === 2) {
       return `B00${number + 1}`;
+    } else if (number.toString().length === 3) {
+      return `B0${number + 1}`;
+    } else if (number.toString().length === 4) {
+      return `B${number + 1}`;
     }
     return `B000${number + 1}`;
   }
@@ -17,12 +22,17 @@ const DataBuku = (props) => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const id = generateID(props.data.length);
-    const dataSend = {
-      ...data,
-      id,
-    };
     try {
+      const token = localStorage.getItem("token");
+      const decoded = jwt_decode(token);
+      const admin_id = decoded.id;
+      const id = generateID(props.data.length);
+      const dataSend = {
+        ...data,
+        id,
+        admin_id,
+      };
+
       const result = await fetch(`${process.env.REACT_APP_API}/api/buku`, {
         method: "POST",
         headers: {
@@ -119,10 +129,15 @@ const DataBuku = (props) => {
                     </div>
                     <div className="card-footer">
                       <button type="submit" className="btn btn-primary">
-                        SIMPAN
+                        <i className="fas fa-save mr-2"></i>SIMPAN
                       </button>
-                      <button type="button" onClick={() => navigate('/manage-buku')} className="btn btn-success" style={{marginLeft: 5}}>
-                        KEMBALI
+                      <button
+                        type="button"
+                        onClick={() => navigate("/manage-buku")}
+                        className="btn btn-success"
+                        style={{ marginLeft: 5 }}
+                      >
+                        <i className="fas fa-arrow-right mr-2"></i>KEMBALI
                       </button>
                     </div>
                   </form>

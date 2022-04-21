@@ -102,13 +102,13 @@ const Table = (props) => {
                                 }
                                 className="btn btn-success"
                               >
-                                edit
+                               <i className="fas fa-edit"></i> edit
                               </button>
                               <button 
                               onClick={() => props.handleDelete(books.id)}
                               type="button" 
                               className="btn btn-danger ml-2">
-                                delete
+                                <i className="fas fa-trash"></i> delete
                               </button>
                             </td>
                           </tr>
