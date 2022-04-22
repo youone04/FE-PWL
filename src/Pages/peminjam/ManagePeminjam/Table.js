@@ -90,7 +90,7 @@ const Table = (props) => {
                             <td>{i + 1}</td>
                             <td>{anggota.id}</td>
                             <td>{anggota.nama_peminjam}</td>
-                            <td>{anggota.jenis_kelamin}</td>
+                            <td>{anggota.jk}</td>
                             <td>{anggota.alamat}</td>
                             <td>{anggota.hp}</td>
                             <td style={{ width: "25%", textAlign: "center" }}>
@@ -100,8 +100,10 @@ const Table = (props) => {
                                   navigate("/edit-anggota", {
                                     state: {
                                       id: anggota.id,
-                                      nama_buku: anggota.nama_buku,
-                                      jumlah_buku: anggota.jumlah_buku,
+                                      nama_peminjam: anggota.nama_peminjam,
+                                      jk: anggota.jk,
+                                      alamat: anggota.alamat,
+                                      hp: anggota.hp
                                     },
                                   })
                                 }

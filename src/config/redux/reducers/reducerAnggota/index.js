@@ -26,7 +26,7 @@ const initialState = {
             error: null,
           },
         };
-      case " GET_ANGGOTA_FAIL":
+      case "GET_ANGGOTA_FAIL":
         return {
           ...state,
           dataAnggota: {
