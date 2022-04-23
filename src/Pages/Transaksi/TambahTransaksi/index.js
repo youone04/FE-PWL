@@ -24,9 +24,6 @@ const TambahTransaksi = () => {
     dispatch(auth());
   }, [dispatch]);
 
-  console.log(data.count)
-
-
   return (
     <>
       {loading || loadingBuku || loadingAnggota ? (

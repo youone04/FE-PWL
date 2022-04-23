@@ -44,7 +44,6 @@ const FormTambahAnggota = (props) => {
       });
 
       const hasil = await result.json();
-      console.log(hasil)
       if (hasil.status === 200) {
         navigate("/manage-anggota");
         swal("success", hasil.message, "success");
@@ -74,7 +73,7 @@ const FormTambahAnggota = (props) => {
               <div className="col-sm-6">
                 <ol className="breadcrumb float-sm-right">
                   <li className="breadcrumb-item">
-                    <a href="#">Home</a>
+                    <a href="/dashboard">Home</a>
                   </li>
                   <li className="breadcrumb-item active">Tambah Bukuu</li>
                 </ol>

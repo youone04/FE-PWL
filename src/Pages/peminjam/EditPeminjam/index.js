@@ -37,7 +37,6 @@ const EditDataPeminjam = (props) => {
       );
 
       const hasil = await result.json();
-      console.log(hasil);
       if (hasil.status === 200) {
         navigate("/manage-anggota");
         swal("success", hasil.message, "success");

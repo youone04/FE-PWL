@@ -4,13 +4,8 @@ const useAuth = () => {
  const token = localStorage.getItem('token');
   return token;
 };
-
 const ProtectedRoutes = () => {
-
-
   const isAuth = useAuth();
-
   return isAuth ? <Outlet /> : <Navigate to="/" />;
 };
-
 export default ProtectedRoutes;

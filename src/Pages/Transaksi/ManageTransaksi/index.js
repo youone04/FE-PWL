@@ -56,7 +56,6 @@ const ManageTransaksi = () => {
           );
 
           const hasil = await result.json();
-          console.log(hasil);
           if (hasil.status === 200) {
             dispatch(getTransaksi());
             swal("Success", hasil.message, "success");
@@ -122,7 +121,6 @@ const ManageTransaksi = () => {
           );
 
           const hasil = await result.json();
-          console.log(hasil);
           if (hasil.status === 200) {
             dispatch(getTransaksi());
             swal("Success", hasil.message, "success");

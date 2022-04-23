@@ -1,10 +1,7 @@
-import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import "moment/locale/id";
 
 const Table = (props) => {
-  const navigate = useNavigate();
-
   var dateNow = new Date().getTime();
   const numberWithCommas = (x) => {
     return x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -21,7 +18,7 @@ const Table = (props) => {
             <div className="col-sm-6">
               <ol className="breadcrumb float-sm-right">
                 <li className="breadcrumb-item">
-                  <a href="#">Home</a>
+                  <a href="#!!">Home</a>
                 </li>
                 <li className="breadcrumb-item active">{props.title}</li>
               </ol>

@@ -37,7 +37,6 @@ const ManagePeminjam = () => {
           );
 
           const hasil = await result.json();
-          console.log(hasil);
           if (hasil.status === 200) {
             dispatch(getPeminjam());
             swal("Success", hasil.message, "success");

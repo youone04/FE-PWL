@@ -37,7 +37,6 @@ const ManageBuku = () => {
           );
 
           const hasil = await result.json();
-          console.log(hasil);
           if (hasil.status === 200) {
             dispatch(getBuku());
             swal("Success", hasil.message, "success");

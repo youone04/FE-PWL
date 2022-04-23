@@ -14,7 +14,7 @@ const Login = () => {
       Navigate('/dashboard')
     }
 
-  },[])
+  },[Navigate])
 
   const {
     register,
@@ -43,11 +43,6 @@ const Login = () => {
       swal('failed', error.response && error.response.data.message
       ? error.response.data.message
       : error.message,'warning')
-      console.log(
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message
-      );
     }
   };
 
