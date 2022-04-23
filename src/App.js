@@ -15,6 +15,8 @@ import TambahPeminjam from "./Pages/peminjam/TambahPeminjam";
 import EditDataPeminjam from "./Pages/peminjam/EditPeminjam";
 import ManageTransaksi from "./Pages/Transaksi/ManageTransaksi";
 import TambahTransaksi from "./Pages/Transaksi/TambahTransaksi";
+import LogPeminjaman from "./Pages/Log/LogPeminjaman";
+import LogPengembalian from "./Pages/Log/LogPengembalian";
 function App() {
   const location = useLocation();
   const position = location.pathname !== "/";
@@ -42,6 +44,9 @@ function App() {
 
           <Route exact path="/manage-transaksi" element={<ManageTransaksi />} />
           <Route exact path="/tambah-transaksi" element={<TambahTransaksi />} />
+
+          <Route exact path="/log-peminjaman" element={<LogPeminjaman />} />
+          <Route exact path="/log-pengembalian" element={<LogPengembalian />} />
         </Route>
       </Routes>
       {position && <Footer />}
