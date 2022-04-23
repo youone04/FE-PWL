@@ -4,7 +4,7 @@ import { getPeminjam } from "../../../config/redux/actions/getAnggota";
 import { auth } from "../../../config/redux/actions/authAction";
 import { useEffect } from "react";
 
-const TambahPeminjam = (props) => {
+const TambahPeminjam = () => {
   const anggota = useSelector((state) => state.anggota);
   const dispatch = useDispatch();
   const { data, loading, error } = anggota.dataAnggota;

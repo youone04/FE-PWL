@@ -13,6 +13,8 @@ import EditBuku from "./Pages/buku/EditBuku";
 import ManagePeminjam from "./Pages/peminjam/ManagePeminjam";
 import TambahPeminjam from "./Pages/peminjam/TambahPeminjam";
 import EditDataPeminjam from "./Pages/peminjam/EditPeminjam";
+import ManageTransaksi from "./Pages/Transaksi/ManageTransaksi";
+import TambahTransaksi from "./Pages/Transaksi/TambahTransaksi";
 function App() {
   const location = useLocation();
   const position = location.pathname !== "/";
@@ -37,6 +39,9 @@ function App() {
           <Route exact path="/manage-anggota" element={<ManagePeminjam />} />
           <Route exact path="/tambah-anggota" element={<TambahPeminjam />} />
           <Route exact path="/edit-anggota" element={<EditDataPeminjam />} />
+
+          <Route exact path="/manage-transaksi" element={<ManageTransaksi />} />
+          <Route exact path="/tambah-transaksi" element={<TambahTransaksi />} />
         </Route>
       </Routes>
       {position && <Footer />}
