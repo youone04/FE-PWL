@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom'
+
 const Menu = () => {
   return (
     <>
@@ -13,7 +15,7 @@ const Menu = () => {
               />
             </div>
             <div className="info">
-              <a href="#!!" className="d-block">
+              <a href="#!" className="d-block">
                 Admin
               </a>
             </div>
@@ -26,38 +28,19 @@ const Menu = () => {
               role="menu"
               data-accordion="false"
             >
+
               <li className="nav-item menu-open">
-                <a href="#!!" className="nav-link active">
-                  <i className="nav-icon fas fa-tachometer-alt" />
-                  <p>
-                    Dashboard
-                    <i className="right fas fa-angle-left" />
-                  </p>
-                </a>
                 <ul className="nav nav-treeview">
                   <li className="nav-item">
-                    <a href="./index.html" className="nav-link active">
-                      <i className="far fa-circle nav-icon" />
-                      <p>Dashboard v1</p>
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a href="./index2.html" className="nav-link">
-                      <i className="far fa-circle nav-icon" />
-                      <p>Dashboard v2</p>
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a href="./index3.html" className="nav-link">
-                      <i className="far fa-circle nav-icon" />
-                      <p>Dashboard v3</p>
-                    </a>
+                    <Link to="/dashboard" className="nav-link active">
+                      <p>Dashboard</p>
+                    </Link>
                   </li>
                 </ul>
               </li>
               
               <li className="nav-item">
-                <a href="#!!" className="nav-link">
+                <a href="#!" className="nav-link">
                   <i className="nav-icon fas fa-chart-pie" />
                   <p>
                     Kelola Data
@@ -66,29 +49,29 @@ const Menu = () => {
                 </a>
                 <ul className="nav nav-treeview">
                   <li className="nav-item">
-                    <a href="/manage-buku" className="nav-link">
+                    <Link to="/manage-buku" className="nav-link">
                       <i className="far fa-circle nav-icon" />
                       <p>Buku</p>
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a href="/manage-anggota" className="nav-link">
+                    <Link to="/manage-anggota" className="nav-link">
                       <i className="far fa-circle nav-icon" />
                       <p>Anggota</p>
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </li>
               <li className="nav-item">
-                <a href="/manage-transaksi" className="nav-link">
+                <Link to="/manage-transaksi" className="nav-link">
                   <i className="nav-icon fas fa-tree" />
                   <p>
                     Sirkulasi
                   </p>
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a href="#!!" className="nav-link">
+                <a href="#!" className="nav-link">
                   <i className="nav-icon fas fa-edit" />
                   <p>
                     Log Data
@@ -97,16 +80,16 @@ const Menu = () => {
                 </a>
                 <ul className="nav nav-treeview">
                   <li className="nav-item">
-                    <a href="/log-peminjaman" className="nav-link">
+                    <Link to="/log-peminjaman" className="nav-link">
                       <i className="far fa-circle nav-icon" />
                       <p>Log Peminjaman</p>
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a href="/log-pengembalian" className="nav-link">
+                    <Link to="/log-pengembalian" className="nav-link">
                       <i className="far fa-circle nav-icon" />
                       <p>Log Pengembalian</p>
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </li>
@@ -141,13 +124,12 @@ const Menu = () => {
               </li>
               <li className="nav-header">Lainnya</li>
               <li className="nav-item">
-                <a href="pages/calendar.html" className="nav-link">
+                <Link to="/pengguna" className="nav-link">
                   <i className="nav-icon far fa-calendar-alt" />
                   <p>
                     Pengguna System
-                    <span className="badge badge-info right">2</span>
                   </p>
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
                 <a href="pages/gallery.html" className="nav-link">

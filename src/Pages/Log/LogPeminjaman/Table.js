@@ -83,7 +83,6 @@ const Table = (props) => {
                         <th>Nama Buku</th>
                         <th>Tanggal Peminjaman</th>
                         <th>Tanggal Pengembalian</th>
-                        <th>Denda (1000/hari)</th>
                         <th>Jumlah Perpanjang</th>
                       </tr>
                     </thead>
@@ -97,45 +96,6 @@ const Table = (props) => {
                             <td>{transaksi.nama_buku}</td>
                             <td>{moment(transaksi.start).format("LL")}</td>
                             <td>{moment(transaksi.end).format("LL")}</td>
-                            <td style={{ width: "25%" }}>
-                              {
-                                // dateNow
-                                Math.ceil(
-                                  (new Date(`${transaksi.end}`).getTime() -
-                                    dateNow) /
-                                    (1000 * 3600 * 24)
-                                ) < 0 ? (
-                                  <>
-                                    <span className="bg-danger p-1 rounded font-italic">
-                                      Terlambat :{" "}
-                                      {`${Math.abs(
-                                        Math.ceil(
-                                          (new Date(
-                                            `${transaksi.end}`
-                                          ).getTime() -
-                                            dateNow) /
-                                            (1000 * 3600 * 24)
-                                        )
-                                      )} Hari`}
-                                    </span>
-                                    <p className="text-danger font-italic">
-                                      Denda Rp.{" "}
-                                      {numberWithCommas(Math.abs(
-                                        Math.ceil(
-                                          (new Date(
-                                            `${transaksi.end}`
-                                          ).getTime() -
-                                            dateNow) /
-                                            (1000 * 3600 * 24)
-                                        ) * 1000)
-                                      )}
-                                    </p>
-                                  </>
-                                ) : (
-                                  <span className="bg-success rounded p-1">masa pinjam</span>
-                                )
-                              }
-                            </td>
                             <td>{transaksi.jumlah_perpanjang}</td>
                           </tr>
                         );

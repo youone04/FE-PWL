@@ -2,7 +2,7 @@ import "./App.css";
 import Header from "./Components/Admin/Header";
 import Menu from "./Components/Admin/Menu";
 import Footer from "./Components/Admin/Footer";
-import Dashboard from "./Components/Admin/Dashboard";
+import Dashboard from "./Pages/Dashboard";
 import Login from "./Pages/Login";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Table from "./Components/Admin/Table";
@@ -17,6 +17,7 @@ import ManageTransaksi from "./Pages/Transaksi/ManageTransaksi";
 import TambahTransaksi from "./Pages/Transaksi/TambahTransaksi";
 import LogPeminjaman from "./Pages/Log/LogPeminjaman";
 import LogPengembalian from "./Pages/Log/LogPengembalian";
+import Pengguna from "./Pages/pengguna";
 function App() {
   const location = useLocation();
   const position = location.pathname !== "/";
@@ -47,6 +48,7 @@ function App() {
 
           <Route exact path="/log-peminjaman" element={<LogPeminjaman />} />
           <Route exact path="/log-pengembalian" element={<LogPengembalian />} />
+          <Route exact path="/pengguna" element={<Pengguna />} />
         </Route>
       </Routes>
       {position && <Footer />}

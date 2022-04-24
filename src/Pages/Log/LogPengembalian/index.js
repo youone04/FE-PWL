@@ -14,6 +14,8 @@ const LogPengembalian = () => {
     dispatch(auth());
   }, [dispatch]);
 
+  console.log(data)
+
   return (
     <>
       {loading ? (
