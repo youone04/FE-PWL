@@ -8,15 +8,15 @@ const initialState = {
   
   export const reducerAdmin = (state = initialState, action) => {
     switch (action.type) {
-      case "GET_ADMIN_REQUEST":
-        return {
-          ...state,
-          dataAdmin: {
-            loading: true,
-            data: [],
-            error: null,
-          },
-        };
+      // case "GET_ADMIN_REQUEST":
+      //   return {
+      //     ...state,
+      //     dataAdmin: {
+      //       loading: true,
+      //       data: [],
+      //       error: null,
+      //     },
+      //   };
       case "GET_ADMIN_SUCCESS":
         return {
           ...state,

@@ -1,7 +1,6 @@
-export const getBuku = () => async (dispatch) => {
+export const getBuku = (search , offset ,limit) => async (dispatch) => {
   try {
-    dispatch({ type: "GET_BUKU_REQUEST" });
-    const data = await fetch(`${process.env.REACT_APP_API}/api/buku`, {
+    const data = await fetch(`${process.env.REACT_APP_API}/api/buku?search=${search}&offset=${offset}&limit=${limit}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

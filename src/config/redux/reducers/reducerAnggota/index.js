@@ -8,15 +8,15 @@ const initialState = {
   
   export const reducerAnggota = (state = initialState, action) => {
     switch (action.type) {
-      case "GET_ANGGOTA_REQUEST":
-        return {
-          ...state,
-          dataAnggota: {
-            loading: true,
-            data: [],
-            error: null,
-          },
-        };
+      // case "GET_ANGGOTA_REQUEST":
+      //   return {
+      //     ...state,
+      //     dataAnggota: {
+      //       loading: true,
+      //       data: [],
+      //       error: null,
+      //     },
+      //   };
       case "GET_ANGGOTA_SUCCESS":
         return {
           ...state,

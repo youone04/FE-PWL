@@ -1,10 +1,41 @@
-import {Link} from 'react-router-dom'
+import { Link, useNavigate } from "react-router-dom";
+import swal from "sweetalert";
+import jwt_decode from "jwt-decode";
+import { useEffect, useState } from "react";
 
 const Menu = () => {
+  const [username , setUserName] = useState('none');
+  useEffect(() => {
+
+    try{
+      const data = localStorage.getItem('token');
+      const decoded = jwt_decode(data);
+      setUserName(decoded.username);
+    }catch(error){
+      alert(error)
+    }
+
+  },[])
+  
+  const Navigate = useNavigate();
+  const handleLogout = () => {
+    swal({
+      title: "Apakah kamu yakin",
+      text: "Anda akan logout",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        localStorage.removeItem("token");
+        Navigate("/");
+      }
+    });
+  };
+
   return (
     <>
       <aside className="main-sidebar sidebar-dark-primary elevation-4">
-        
         <div className="sidebar">
           <div className="user-panel mt-3 pb-3 mb-3 d-flex">
             <div className="image">
@@ -15,12 +46,12 @@ const Menu = () => {
               />
             </div>
             <div className="info">
-              <a href="#!" className="d-block">
-                Admin
-              </a>
+              <Link to="/dashboard" className="d-block">
+                {username}
+              </Link>
             </div>
           </div>
-         
+
           <nav className="mt-2">
             <ul
               className="nav nav-pills nav-sidebar flex-column"
@@ -28,7 +59,6 @@ const Menu = () => {
               role="menu"
               data-accordion="false"
             >
-
               <li className="nav-item menu-open">
                 <ul className="nav nav-treeview">
                   <li className="nav-item">
@@ -38,7 +68,7 @@ const Menu = () => {
                   </li>
                 </ul>
               </li>
-              
+
               <li className="nav-item">
                 <a href="#!" className="nav-link">
                   <i className="nav-icon fas fa-chart-pie" />
@@ -65,9 +95,7 @@ const Menu = () => {
               <li className="nav-item">
                 <Link to="/manage-transaksi" className="nav-link">
                   <i className="nav-icon fas fa-tree" />
-                  <p>
-                    Sirkulasi
-                  </p>
+                  <p>Sirkulasi</p>
                 </Link>
               </li>
               <li className="nav-item">
@@ -126,17 +154,19 @@ const Menu = () => {
               <li className="nav-item">
                 <Link to="/pengguna" className="nav-link">
                   <i className="nav-icon far fa-calendar-alt" />
-                  <p>
-                    Pengguna System
-                  </p>
+                  <p>Pengguna System</p>
                 </Link>
               </li>
               <li className="nav-item">
-                <a href="pages/gallery.html" className="nav-link">
-                  <i className="nav-icon far fa-image" />
+                <div
+                  style={{ cursor: "pointer" }}
+                  onClick={handleLogout}
+                  className="nav-link text-white"
+                >
+                  <i className="nav-icon far fa-user" />
                   <p>Log Out</p>
-                </a>
-              </li>          
+                </div>
+              </li>
             </ul>
           </nav>
         </div>

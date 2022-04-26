@@ -5,7 +5,7 @@ import jwt_decode from "jwt-decode";
 
 const FormTambahAnggota = (props) => {
   function generateID(number) {
-    if (number?.toString().length === 2) {
+    if (number.toString() === 2) {
       return `A00${number + 1}`;
     } else if (number.toString().length === 3) {
       return `A0${number + 1}`;
@@ -27,7 +27,7 @@ const FormTambahAnggota = (props) => {
       const token = localStorage.getItem("token");
       const decoded = jwt_decode(token);
       const admin_id = decoded.id;
-      const id = generateID(props.data.length);
+      const id = generateID(props.data);
       const dataSend = {
         ...data,
         id,
@@ -98,7 +98,7 @@ const FormTambahAnggota = (props) => {
                           name="id-buku"
                           className="form-control"
                           id="id-buku"
-                          value={generateID(props.data.length)}
+                          value={generateID(props.data)}
                           placeholder="ID"
                           disabled
                         />

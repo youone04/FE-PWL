@@ -1,7 +1,6 @@
-export const getTransaksi = () => async (dispatch) => {
+export const getTransaksi = (search , offset ,limit) => async (dispatch) => {
     try {
-      dispatch({ type: "GET_TRANSAKSI_REQUEST" });
-      const data = await fetch(`${process.env.REACT_APP_API}/api/transaksi`, {
+      const data = await fetch(`${process.env.REACT_APP_API}/api/transaksi?search=${search}&offset=${offset}&limit=${limit}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

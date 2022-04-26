@@ -1,7 +1,6 @@
-export const getLogPengembalian = () => async (dispatch) => {
+export const getLogPengembalian = (search, offset, limit) => async (dispatch) => {
     try {
-      dispatch({ type: "GET_PENGEMBALIAN_LOG_REQUEST" });
-      const data = await fetch(`${process.env.REACT_APP_API}/api/log-pengembalian`, {
+      const data = await fetch(`${process.env.REACT_APP_API}/api/log-pengembalian?search=${search}&offset=${offset}&limit=${limit}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

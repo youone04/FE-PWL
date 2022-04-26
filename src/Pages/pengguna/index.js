@@ -2,41 +2,45 @@ import Table from "./Table";
 import { useSelector, useDispatch } from "react-redux";
 import { getAdmin } from "../../config/redux/actions/getAdmin";
 import { auth } from "../../config/redux/actions/authAction";
-import { useEffect } from "react";
+import { useEffect ,useState } from "react";
 import swal from "sweetalert";
+import jwt_decode from "jwt-decode";
 
 const Pengguna = () => {
+  const [search, setSearch] = useState("");
+  const [limit, setLimit] = useState(5);
+  const [offset, setOffset] = useState(0);
+  const [remountComponent, setRemountComponent] = useState(0);
+  const [username , setUserName] = useState('none');
+  const [role , setRole] = useState('none');
+
   const admin = useSelector((state) => state.admin);
   const dispatch = useDispatch();
   const { data, loading, error } = admin.dataAdmin;
 
   useEffect(() => {
-    dispatch(getAdmin());
+    dispatch(getAdmin(search, offset, limit));
     dispatch(auth());
-  }, [dispatch]);
+  }, [dispatch,search, offset, limit]);
 
-  const handlePengembalian = (id, end) => {
-    let dateNow = new Date().getTime();
-    let masa = Math.ceil(
-      (new Date(`${end}`).getTime() - dateNow) / (1000 * 3600 * 24)
-    );
-    let denda = 0;
-    if (masa < 0) {
-      denda =
-        Math.abs(
-          Math.ceil(
-            (new Date(`${end}`).getTime() - dateNow) / (1000 * 3600 * 24)
-          )
-        ) * 1000;
+  useEffect(() => {
+
+    try{
+      const data = localStorage.getItem('token');
+      const decoded = jwt_decode(data);
+      setUserName(decoded.username);
+      console.log(decoded)
+      setRole(decoded.role);
+    }catch(error){
+      alert(error)
     }
-    const dataSend = {
-      pengembalian: true,
-      denda: denda,
-    };
 
+  },[])
+
+  const handleDelete = (id) => {
     swal({
       title: "Apakah Kamu Yakin?",
-      text: "Pastikan Peminjam Sudah Membayar Denda Jika Terdapat Denda",
+      text: "Data akan di hapus",
       icon: "warning",
       buttons: true,
       dangerMode: true,
@@ -44,20 +48,19 @@ const Pengguna = () => {
       if (willDelete) {
         try {
           const result = await fetch(
-            `${process.env.REACT_APP_API}/api/transaksi/${id}`,
+            `${process.env.REACT_APP_API}/api/admin/${id}`,
             {
-              method: "PUT",
+              method: "DELETE",
               headers: {
                 "Content-Type": "application/json",
                 // Authorization: `Bearer ${token}`,
               },
-              body: JSON.stringify(dataSend),
             }
           );
 
           const hasil = await result.json();
           if (hasil.status === 200) {
-            // dispatch(getTransaksi());
+            dispatch(getAdmin(search, offset, limit));
             swal("Success", hasil.message, "success");
           } else {
             swal("Failed", hasil.message, "error");
@@ -75,70 +78,13 @@ const Pengguna = () => {
     });
   };
 
-  const handlePerpanjang = (id,start , end, jumlahPerpanjang) => {
-    const dateStart = new Date(start)
-    dateStart.setTime(dateStart.getTime() + (3 * 24 * 60 * 60 * 1000));
-
-    const dateEnd = new Date(end)
-    dateEnd.setTime(dateEnd.getTime() + (3 * 24 * 60 * 60 * 1000));
-
-    const dataSend = {
-      start: dateStart,
-      end: dateEnd,
-    };
-    let dateNow = new Date().getTime();
-    let masa = Math.ceil(
-      (new Date(`${end}`).getTime() - dateNow) / (1000 * 3600 * 24)
-    );
-    if (masa < 0) {
-      swal("Failed", "Anda Tidak dapat perpanjang, silahkan bayar denda", "warning");
-      return
-    }
-    if(jumlahPerpanjang > 2){
-      swal("Failed", " Limit Batas Perpanjangan 3X", "warning");
-      return
-    }
-
-    swal({
-      title: "Apakah Kamu Yakin?",
-      text: "Petpanjang Otomatis 3 Hari",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then(async (willDelete) => {
-      if (willDelete) {
-        try {
-          const result = await fetch(
-            `${process.env.REACT_APP_API}/api/perpanjang/${id}`,
-            {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-                // Authorization: `Bearer ${token}`,
-              },
-              body: JSON.stringify(dataSend),
-            }
-          );
-
-          const hasil = await result.json();
-          if (hasil.status === 200) {
-            // dispatch(getTransaksi());
-            swal("Success", hasil.message, "success");
-          } else {
-            swal("Failed", hasil.message, "error");
-          }
-        } catch (error) {
-          swal(
-            "Failed",
-            error.response && error.response.data.message
-              ? error.response.data.message
-              : error.message,
-            "error"
-          );
-        }
-      }
-    });
+  const handleLimit = (e) => {
+    e.preventDefault();
+    setRemountComponent(Math.random());
+    setLimit(e.target.value);
+    setOffset(0);
   };
+
 
   return (
     <>
@@ -152,11 +98,19 @@ const Pengguna = () => {
         </div>
       ) : (
         <Table
+          tambah="tambah-pengguna"
+          title="Manage Pengguna"
+          handleDelete={handleDelete}
           data={data.data}
-          tambah="tambah-transaksi"
-          title="Manage Tranaksi"
-          handlePengembalian={handlePengembalian}
-          handlePerpanjang={handlePerpanjang}
+          dataLength={data.count}
+          limit={limit}
+          setOffset={setOffset}
+          offset={offset}
+          remountComponent={remountComponent}
+          setSearch={setSearch}
+          handleLimit={handleLimit}
+          username={username}
+          role={role}
         />
       )}
     </>

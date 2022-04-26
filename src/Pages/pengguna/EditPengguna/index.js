@@ -1,40 +1,50 @@
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,useLocation } from "react-router-dom";
 import jwt_decode from "jwt-decode";
+import { useEffect } from "react";
 
-const DataBuku = (props) => {
-  function generateID(number) {
-    if (number.toString().length === 2) {
-      return `B00${number + 1}`;
-    } else if (number.toString().length === 3) {
-      return `B0${number + 1}`;
-    } else if (number.toString().length === 4) {
-      return `B${number + 1}`;
-    }
-    return `B000${number + 1}`;
-  }
+const EditPengguna = () => {
+  const { state } = useLocation();
+  const { id, username, role , password } = state;  
   const navigate = useNavigate();
+
+  useEffect(() => {
+    try{
+      const data = localStorage.getItem('token');
+      const decoded = jwt_decode(data);
+      if(decoded.role!=='admin'){
+        navigate('/pengguna')
+      }
+    }catch(error){
+      alert(error)
+    }
+
+  },[])
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+        id,
+        username,
+        role,
+        password
+      },
+  });
 
   const onSubmit = async (data) => {
     try {
-      const token = localStorage.getItem("token");
-      const decoded = jwt_decode(token);
-      const admin_id = decoded.id;
-      const id = generateID(props.data);
+     
       const dataSend = {
         ...data,
         id,
-        admin_id,
       };
 
-      const result = await fetch(`${process.env.REACT_APP_API}/api/buku`, {
-        method: "POST",
+      const result = await fetch(`${process.env.REACT_APP_API}/api/admin/${id}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           // Authorization: `Bearer ${token}`,
@@ -44,7 +54,7 @@ const DataBuku = (props) => {
 
       const hasil = await result.json();
       if (hasil.status === 200) {
-        navigate("/manage-buku");
+        navigate("/pengguna");
         swal("success", hasil.message, "success");
       } else {
         swal("failed", hasil.message, "warning");
@@ -67,14 +77,14 @@ const DataBuku = (props) => {
           <div className="container-fluid">
             <div className="row mb-2">
               <div className="col-sm-6">
-                <h1>Tambah Buku</h1>
+                <h1>Edit Buku</h1>
               </div>
               <div className="col-sm-6">
                 <ol className="breadcrumb float-sm-right">
                   <li className="breadcrumb-item">
-                    <a href="#">Home</a>
+                    <a href="/dashboard">Home</a>
                   </li>
-                  <li className="breadcrumb-item active">Tambah Bukuu</li>
+                  <li className="breadcrumb-item active">Edit Buku</li>
                 </ol>
               </div>
             </div>
@@ -86,54 +96,65 @@ const DataBuku = (props) => {
               <div className="col-md-12">
                 <div className="card card-primary">
                   <div className="card-header">
-                    <h3 className="card-title">Data Buku</h3>
+                    <h3 className="card-title">Data Pengguna</h3>
                   </div>
                   <form onSubmit={handleSubmit(onSubmit)} id="quickForm">
                     <div className="card-body">
                       <div className="form-group">
-                        <label htmlFor="id-buku">ID BUKU</label>
+                        <label htmlFor="id-buku">ID Pengguna</label>
                         <input
                           type="text"
                           name="id-buku"
                           className="form-control"
                           id="id-buku"
-                          value={generateID(props.data)}
+                          value={id}
                           placeholder="ID"
                           disabled
                         />
                       </div>
                       <div className="form-group">
-                        <label htmlFor="nama-buku">Nama Buku</label>
+                        <label htmlFor="username">USername</label>
                         <input
                           type="text"
-                          name="nama buku"
+                          name="username"
                           className="form-control"
-                          id="nama-buku"
-                          placeholder="Buku"
-                          {...register("nama_buku", { required: true })}
+                          id="username"
+                          placeholder="Username"
+                          {...register("username", { required: true })}
                         />
-                        {errors.nama_buku && <p>Nama buku is required.</p>}
+                        {errors.username && <p>Username is required.</p>}
+                      </div>
+
+                      <div className="form-group">
+                        <label htmlFor="alamat">Password</label>
+                        <input
+                          type="password"
+                          name="password"
+                          className="form-control"
+                          id="Password"
+                          placeholder="Password"
+                          {...register("password", { required: true })}
+                        />
+                        {errors.Password && <p>Passoword is required.</p>}
                       </div>
                       <div className="form-group">
-                        <label htmlFor="nama-buku">Tahun Terbit</label>
-                        <input
-                          type="text"
-                          name="jumlah buku"
-                          className="form-control"
-                          id="jumlah-buku"
-                          placeholder="2020"
-                          {...register("jumlah_buku", { required: true })}
-                        />
-                        {errors.jumlah_buku && <p>Tahun terbit buku is required.</p>}
+                        <label>Role</label>
+                        <select {...register("role", { required: true })} className="form-control">
+                          <option>Pilih</option>
+                          <option value={'petugas'}>Petugas</option>
+                          {/* <option>Perempuan</option> */}
+                        </select>
+                        {errors.role && <p>role is required.</p>}
                       </div>
                     </div>
+
                     <div className="card-footer">
                       <button type="submit" className="btn btn-primary">
                         <i className="fas fa-save mr-2"></i>SIMPAN
                       </button>
                       <button
                         type="button"
-                        onClick={() => navigate("/manage-buku")}
+                        onClick={() => navigate("/pengguna")}
                         className="btn btn-success"
                         style={{ marginLeft: 5 }}
                       >
@@ -151,4 +172,4 @@ const DataBuku = (props) => {
     </>
   );
 };
-export default DataBuku;
+export default EditPengguna;

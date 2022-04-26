@@ -8,15 +8,6 @@ const initialState = {
   
   export const reducerBuku = (state = initialState, action) => {
     switch (action.type) {
-      case "GET_BUKU_REQUEST":
-        return {
-          ...state,
-          dataBuku: {
-            loading: true,
-            data: [],
-            error: null,
-          },
-        };
       case "GET_BUKU_SUCCESS":
         return {
           ...state,
@@ -26,7 +17,7 @@ const initialState = {
             error: null,
           },
         };
-      case " GET_BUKU_FAIL":
+      case "GET_BUKU_FAIL":
         return {
           ...state,
           dataBuku: {

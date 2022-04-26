@@ -18,6 +18,8 @@ import TambahTransaksi from "./Pages/Transaksi/TambahTransaksi";
 import LogPeminjaman from "./Pages/Log/LogPeminjaman";
 import LogPengembalian from "./Pages/Log/LogPengembalian";
 import Pengguna from "./Pages/pengguna";
+import TambahPengguna from "./Pages/pengguna/TambahPengguna";
+import EditPengguna from "./Pages/pengguna/EditPengguna";
 function App() {
   const location = useLocation();
   const position = location.pathname !== "/";
@@ -48,7 +50,10 @@ function App() {
 
           <Route exact path="/log-peminjaman" element={<LogPeminjaman />} />
           <Route exact path="/log-pengembalian" element={<LogPengembalian />} />
+
           <Route exact path="/pengguna" element={<Pengguna />} />
+          <Route exact path="/tambah-pengguna" element={<TambahPengguna />} />
+          <Route exact path="/edit-pengguna" element={<EditPengguna />} />
         </Route>
       </Routes>
       {position && <Footer />}

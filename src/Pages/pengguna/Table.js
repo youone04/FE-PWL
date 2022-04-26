@@ -1,13 +1,32 @@
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import "moment/locale/id";
+import ReactPaginate from "react-paginate";
+import { useEffect, useState } from "react";
 
 const Table = (props) => {
   const navigate = useNavigate();
+  const [currentItems, setCurrentItems] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
+  const [itemFirst, setItemFirst] = useState(0);
 
-  let dateNow = new Date().getTime();
-  const numberWithCommas = (x) => {
-    return x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  useEffect(() => {
+    const setPagination = () => {
+      setItemFirst(props.offset + 1);
+      setCurrentItems(props.data);
+      setPageCount(Math.ceil(props.dataLength / props.limit));
+    };
+    setPagination();
+  }, [props.offset, props.data, props.dataLength]);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * props.limit) % props.dataLength;
+    props.setOffset(newOffset || 0);
+    const scrollToTop = () => {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    };
+
+    scrollToTop();
   };
 
   return (
@@ -33,12 +52,15 @@ const Table = (props) => {
         <div className="container-fluid">
           <div className="row">
             <div className="col-12">
-              <button
+              {
+                props.role === 'admin'?
+                <button
                 onClick={() => navigate(`/${props.tambah}`)}
                 className="btn btn-primary mb-3"
               >
                 + TAMBAH
-              </button>
+              </button>:''
+              }
               <div className="card">
                 <div className="card-header">
                   {/* <button className="btn btn-primary mb-3">+ TAMBAH</button> */}
@@ -46,12 +68,13 @@ const Table = (props) => {
                     className="form-control col-lg-2"
                     style={{ display: "inline-block" }}
                     id="exampleFormControlSelect1"
+                    onChange={(e)=> props.handleLimit(e)}
                   >
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+                    <option value={5}>5</option>
+                    <option value={10}>10</option>
+                    <option value={15}>15</option>
+                    <option value={20}>20</option>
+                    <option value={25}>25</option>
                   </select>
 
                   <div className="card-tools">
@@ -64,6 +87,7 @@ const Table = (props) => {
                         name="table_search"
                         className="form-control float-right"
                         placeholder="Search"
+                        onChange={(e) => props.setSearch(e.target.value)}
                       />
                       <div className="input-group-append">
                         <button type="submit" className="btn btn-default">
@@ -84,38 +108,76 @@ const Table = (props) => {
                         <th>ID Admin</th>
                         <th>Nama</th>
                         <th>Role</th>
-                        <th>Aksi</th>
+                        {
+                          props.role==='admin'?
+                          <th>Aksi</th>:''
+                        }
+                       
                       </tr>
                     </thead>
                     <tbody className="text-center">
-                      {props.data.map((admin, i) => {
+                      {currentItems.map((admin, i) => {
                         return (
                           <tr key={i}>
-                            <td>{i + 1}</td>
+                            <td>{i + itemFirst}</td>
                             <td>{admin.id}</td>
-                            <td>{admin.username}</td>
-                            <td>{'admin'}</td>
-                            <td style={{ width: "33%", textAlign: "center" }}>
+                            <td>{admin.username===props.username?`${admin.username} (anda)`:admin.username}</td>
+                            <td>{admin.role}</td>
+                            {
+                              props.role==='admin'?
+                              <td style={{ width: "33%", textAlign: "center" }}>
                               <button
                                 className="btn btn-success"
                                 type="button"
-                                onClick={() => props.handlePerpanjang(admin.id,admin.start ,admin.end,admin.jumlah_perpanjang)}
+                                onClick={() =>
+                                  navigate("/edit-pengguna", {
+                                    state: {
+                                      id: admin.id,
+                                      username: admin.username,
+                                      role: admin.role,
+                                      password: admin.password
+                                    },
+                                  })}
                               >
-                             <i className="fa fa-circle"></i>
+                          edit
                               </button>
                               <button
-                                onClick={() => props.handlePengembalian(admin.id , admin.end)}
+                                onClick={() => props.handleDelete(admin.id)}
                                 type="button"
                                 className="btn btn-danger ml-2"
                               >
-                                <i className="fa fa-circle"></i>
+                               hapus
                               </button>
-                            </td>
+                            </td>:''
+                            }
+                           
                           </tr>
                         );
                       })}
                     </tbody>
                   </table>
+                  <div key={props.remountComponent}>
+                    <ReactPaginate
+                      breakLabel="..."
+                      nextLabel={"Selanjutnya >"}
+                      onPageChange={handlePageClick}
+                      initialPage={0}
+                      pageRangeDisplayed={5}
+                      pageCount={pageCount}
+                      previousLabel={"< Sebelumnya"}
+                      pageClassName="page-item"
+                      pageLinkClassName="page-link"
+                      previousClassName="page-item"
+                      previousLinkClassName="page-link"
+                      nextClassName="page-item"
+                      nextLinkClassName="page-link"
+                      breakClassName="page-item"
+                      breakLinkClassName="page-link"
+                      containerClassName="pagination"
+                      activeClassName="active"
+                      renderOnZeroPageCount={null}
+                    />
+                  </div>
                 </div>
               </div>
             </div>

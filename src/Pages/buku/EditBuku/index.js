@@ -106,7 +106,7 @@ const EditBuku = () => {
                         {errors.nama_buku && <p>Nama buku is required.</p>}
                       </div>
                       <div className="form-group">
-                        <label htmlFor="nama-buku">Jumlah Buku</label>
+                        <label htmlFor="nama-buku">Tahun Terbit</label>
                         <input
                           type="text"
                           name="jumlah buku"
@@ -115,7 +115,7 @@ const EditBuku = () => {
                           placeholder="Jumlah"
                           {...register("jumlah_buku", { required: true })}
                         />
-                        {errors.jumlah_buku && <p>Jumlah buku is required.</p>}
+                        {errors.jumlah_buku && <p>Tahun terbit buku is required.</p>}
                       </div>
                     </div>
                     <div className="card-footer">

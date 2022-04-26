@@ -1,8 +1,31 @@
 import { useNavigate } from "react-router-dom";
+import ReactPaginate from "react-paginate";
+import { useEffect, useState } from "react";
 
 const Table = (props) => {
   const navigate = useNavigate();
+  const [currentItems, setCurrentItems] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
+  const [itemFirst, setItemFirst] = useState(0);
 
+  useEffect(() => {
+    const setPagination = () => {
+      setItemFirst(props.offset + 1);
+      setCurrentItems(props.data);
+      setPageCount(Math.ceil(props.dataLength / props.limit));
+    };
+    setPagination();
+  }, [props.offset, props.data, props.dataLength]);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * props.limit) % props.dataLength;
+    props.setOffset(newOffset || 0);
+    const scrollToTop = () => {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    };
+
+    scrollToTop();
+  };
 
   return (
     <div className="content-wrapper">
@@ -40,12 +63,13 @@ const Table = (props) => {
                     className="form-control col-lg-2"
                     style={{ display: "inline-block" }}
                     id="exampleFormControlSelect1"
+                    onChange={(e)=> props.handleLimit(e)}
                   >
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+                     <option value={5}>5</option>
+                    <option value={10}>10</option>
+                    <option value={15}>15</option>
+                    <option value={20}>20</option>
+                    <option value={25}>25</option>
                   </select>
 
                   <div className="card-tools">
@@ -54,6 +78,7 @@ const Table = (props) => {
                       style={{ width: 150 }}
                     >
                       <input
+                        onChange={(e) => props.setSearch(e.target.value)}
                         type="text"
                         name="table_search"
                         className="form-control float-right"
@@ -84,10 +109,10 @@ const Table = (props) => {
                       </tr>
                     </thead>
                     <tbody className="text-center">
-                      {props.data.map((anggota, i) => {
+                      {currentItems.map((anggota, i) => {
                         return (
                           <tr key={i}>
-                            <td>{i + 1}</td>
+                            <td>{i + itemFirst}</td>
                             <td>{anggota.id}</td>
                             <td>{anggota.nama_peminjam}</td>
                             <td>{anggota.jk}</td>
@@ -103,18 +128,19 @@ const Table = (props) => {
                                       nama_peminjam: anggota.nama_peminjam,
                                       jk: anggota.jk,
                                       alamat: anggota.alamat,
-                                      hp: anggota.hp
+                                      hp: anggota.hp,
                                     },
                                   })
                                 }
                                 className="btn btn-success"
                               >
-                               <i className="fas fa-edit"></i> edit
+                                <i className="fas fa-edit"></i> edit
                               </button>
-                              <button 
-                              onClick={() => props.handleDelete(anggota.id)}
-                              type="button" 
-                              className="btn btn-danger ml-2">
+                              <button
+                                onClick={() => props.handleDelete(anggota.id)}
+                                type="button"
+                                className="btn btn-danger ml-2"
+                              >
                                 <i className="fas fa-trash"></i> delete
                               </button>
                             </td>
@@ -123,6 +149,28 @@ const Table = (props) => {
                       })}
                     </tbody>
                   </table>
+                  <div key={props.remountComponent}>
+                    <ReactPaginate
+                      breakLabel="..."
+                      nextLabel={"Selanjutnya >"}
+                      onPageChange={handlePageClick}
+                      initialPage={0}
+                      pageRangeDisplayed={5}
+                      pageCount={pageCount}
+                      previousLabel={"< Sebelumnya"}
+                      pageClassName="page-item"
+                      pageLinkClassName="page-link"
+                      previousClassName="page-item"
+                      previousLinkClassName="page-link"
+                      nextClassName="page-item"
+                      nextLinkClassName="page-link"
+                      breakClassName="page-item"
+                      breakLinkClassName="page-link"
+                      containerClassName="pagination"
+                      activeClassName="active"
+                      renderOnZeroPageCount={null}
+                    />
+                  </div>
                 </div>
               </div>
             </div>

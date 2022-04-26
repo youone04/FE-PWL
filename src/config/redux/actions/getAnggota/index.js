@@ -1,7 +1,7 @@
-export const getPeminjam = () => async (dispatch) => {
+export const getPeminjam = (search , offset ,limit) => async (dispatch) => {
     try {
-      dispatch({ type: "GET_ANGGOTA_REQUEST" });
-      const data = await fetch(`${process.env.REACT_APP_API}/api/peminjam`, {
+      // dispatch({ type: "GET_ANGGOTA_REQUEST" });
+      const data = await fetch(`${process.env.REACT_APP_API}/api/peminjam?search=${search}&offset=${offset}&limit=${limit}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

@@ -18,11 +18,12 @@ const TambahTransaksi = () => {
   const { data : dataAnggota , loading : loadingAnggota, error: errorAnggota } = anggota.dataAnggota;
 
   useEffect(() => {
-    dispatch(getTransaksi());
-    dispatch(getBuku());
-    dispatch(getPeminjam());
+    dispatch(getTransaksi("",0,data?.data?.length));
+    dispatch(getBuku("",0,dataBuku?.data?.length));
+    dispatch(getPeminjam("",0,dataAnggota?.data?.length));
     dispatch(auth());
   }, [dispatch]);
+
 
   return (
     <>

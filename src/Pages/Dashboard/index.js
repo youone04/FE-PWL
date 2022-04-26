@@ -101,7 +101,7 @@ const Dashboard = () => {
                     <div className="icon">
                       <i className="ion ion-pie-graph" />
                     </div>
-                    <Link to="/dashboard" className="small-box-footer">
+                    <Link to="/pengguna" className="small-box-footer">
                       More info <i className="fas fa-arrow-circle-right" />
                     </Link>
                   </div>

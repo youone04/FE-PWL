@@ -8,15 +8,15 @@ const initialState = {
   
   export const reducerTransaksi = (state = initialState, action) => {
     switch (action.type) {
-      case "GET_TRANSAKSI_REQUEST":
-        return {
-          ...state,
-          dataTransaksi: {
-            loading: true,
-            data: [],
-            error: null,
-          },
-        };
+      // case "GET_TRANSAKSI_REQUEST":
+      //   return {
+      //     ...state,
+      //     dataTransaksi: {
+      //       loading: true,
+      //       data: [],
+      //       error: null,
+      //     },
+      //   };
       case "GET_TRANSAKSI_SUCCESS":
         return {
           ...state,

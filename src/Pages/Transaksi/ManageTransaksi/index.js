@@ -2,18 +2,23 @@ import Table from "./Table";
 import { useSelector, useDispatch } from "react-redux";
 import { getTransaksi } from "../../../config/redux/actions/getTransaksi";
 import { auth } from "../../../config/redux/actions/authAction";
-import { useEffect } from "react";
+import { useEffect ,useState} from "react";
 import swal from "sweetalert";
 
 const ManageTransaksi = () => {
+  const [search, setSearch] = useState("");
+  const [limit, setLimit] = useState(5);
+  const [offset, setOffset] = useState(0);
+  const [remountComponent, setRemountComponent] = useState(0);
+
   const transaksi = useSelector((state) => state.transaksi);
   const dispatch = useDispatch();
   const { data, loading, error } = transaksi.dataTransaksi;
 
   useEffect(() => {
-    dispatch(getTransaksi());
+    dispatch(getTransaksi(search, offset, limit));
     dispatch(auth());
-  }, [dispatch]);
+  }, [dispatch,search, offset, limit]);
 
   const handlePengembalian = (id, end) => {
     let dateNow = new Date().getTime();
@@ -32,6 +37,7 @@ const ManageTransaksi = () => {
     const dataSend = {
       pengembalian: true,
       denda: denda,
+      updated_at:new Date()
     };
 
     swal({
@@ -57,7 +63,7 @@ const ManageTransaksi = () => {
 
           const hasil = await result.json();
           if (hasil.status === 200) {
-            dispatch(getTransaksi());
+            dispatch(getTransaksi(search, offset, limit));
             swal("Success", hasil.message, "success");
           } else {
             swal("Failed", hasil.message, "error");
@@ -122,7 +128,7 @@ const ManageTransaksi = () => {
 
           const hasil = await result.json();
           if (hasil.status === 200) {
-            dispatch(getTransaksi());
+            dispatch(getTransaksi(search, offset, limit));
             swal("Success", hasil.message, "success");
           } else {
             swal("Failed", hasil.message, "error");
@@ -140,6 +146,14 @@ const ManageTransaksi = () => {
     });
   };
 
+  const handleLimit = (e) => {
+    e.preventDefault();
+    setRemountComponent(Math.random());
+    setLimit(e.target.value);
+    setOffset(0);
+  };
+
+
   return (
     <>
       {loading ? (
@@ -152,11 +166,19 @@ const ManageTransaksi = () => {
         </div>
       ) : (
         <Table
-          data={data.data}
           tambah="tambah-transaksi"
           title="Manage Tranaksi"
           handlePengembalian={handlePengembalian}
           handlePerpanjang={handlePerpanjang}
+
+          data={data.data}
+          dataLength={data.data.length}
+          limit={limit}
+          setOffset={setOffset}
+          offset={offset}
+          remountComponent={remountComponent}
+          setSearch={setSearch}
+          handleLimit={handleLimit}
         />
       )}
     </>

@@ -1,7 +1,6 @@
-export const getLogPeminjaman = () => async (dispatch) => {
+export const getLogPeminjaman = (search, offset, limit) => async (dispatch) => {
     try {
-      dispatch({ type: "GET_PEMINJAMAN_LOG_REQUEST" });
-      const data = await fetch(`${process.env.REACT_APP_API}/api/log-peminjaman`, {
+      const data = await fetch(`${process.env.REACT_APP_API}/api/log-peminjaman?search=${search}&offset=${offset}&limit=${limit}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

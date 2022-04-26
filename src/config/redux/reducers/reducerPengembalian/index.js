@@ -8,15 +8,15 @@ const initialState = {
   
   export const reducerLogPengembalian = (state = initialState, action) => {
     switch (action.type) {
-      case "GET_PENGEMBALIAN_LOG_REQUEST":
-        return {
-          ...state,
-          dataLogPengembalian: {
-            loading: true,
-            data: [],
-            error: null,
-          },
-        };
+      // case "GET_PENGEMBALIAN_LOG_REQUEST":
+      //   return {
+      //     ...state,
+      //     dataLogPengembalian: {
+      //       loading: true,
+      //       data: [],
+      //       error: null,
+      //     },
+      //   };
       case "GET_PENGEMBALIAN_LOG_SUCCESS":
         return {
           ...state,

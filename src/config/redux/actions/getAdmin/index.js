@@ -1,7 +1,6 @@
-export const getAdmin = () => async (dispatch) => {
+export const getAdmin = (search, offset, limit) => async (dispatch) => {
     try {
-      dispatch({ type: "GET_ADMIN_REQUEST" });
-      const data = await fetch(`${process.env.REACT_APP_API}/api/admin`, {
+      const data = await fetch(`${process.env.REACT_APP_API}/api/admin?search=${search}&offset=${offset}&limit=${limit}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

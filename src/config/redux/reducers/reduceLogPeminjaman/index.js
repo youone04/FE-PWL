@@ -8,15 +8,15 @@ const initialState = {
   
   export const reducerLogPeminjaman = (state = initialState, action) => {
     switch (action.type) {
-      case "GET_PEMINJAMAN_LOG_REQUEST":
-        return {
-          ...state,
-          dataLogPeminjaman: {
-            loading: true,
-            data: [],
-            error: null,
-          },
-        };
+      // case "GET_PEMINJAMAN_LOG_REQUEST":
+      //   return {
+      //     ...state,
+      //     dataLogPeminjaman: {
+      //       loading: true,
+      //       data: [],
+      //       error: null,
+      //     },
+      //   };
       case "GET_PEMINJAMAN_LOG_SUCCESS":
         return {
           ...state,

@@ -10,7 +10,7 @@ const TambahPeminjam = () => {
   const { data, loading, error } = anggota.dataAnggota;
 
   useEffect(() => {
-    dispatch(getPeminjam());
+    dispatch(getPeminjam("",5,0));
     dispatch(auth());
   }, [dispatch]);
 
@@ -26,7 +26,7 @@ const TambahPeminjam = () => {
           {error}
         </div>
       ) : (
-        <FormTambahAnggota data={data.data} />
+        <FormTambahAnggota data={data.count} />
       )}
     </>
   );

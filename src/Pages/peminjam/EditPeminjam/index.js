@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import swal from "sweetalert";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const EditDataPeminjam = (props) => {
+const EditDataPeminjam = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const { id, nama_peminjam, jk, alamat, hp } = state;
