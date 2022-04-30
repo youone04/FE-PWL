@@ -153,7 +153,6 @@ const ManageTransaksi = () => {
     setOffset(0);
   };
 
-
   return (
     <>
       {loading ? (
@@ -172,7 +171,7 @@ const ManageTransaksi = () => {
           handlePerpanjang={handlePerpanjang}
 
           data={data.data}
-          dataLength={data.data.length}
+          dataLength={data.count.count}
           limit={limit}
           setOffset={setOffset}
           offset={offset}

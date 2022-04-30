@@ -5,6 +5,7 @@ import DataPengguna from "./DataPengguna";
 import { getAdmin } from "../../../config/redux/actions/getAdmin";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 
 const TambahPengguna = () => {
   const admin = useSelector((state) => state.admin);
@@ -25,7 +26,7 @@ const TambahPengguna = () => {
         Navigate('/pengguna')
       }
     }catch(error){
-      alert(error)
+      swal('Failed','session habis','warning')
     }
 
   },[])

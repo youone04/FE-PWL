@@ -1,9 +1,12 @@
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
-// import jwt_decode from "jwt-decode";
+import jwt_decode from "jwt-decode";
+import {useEffect , useState} from 'react';
 
 const DataPengguna = (props) => {
+  const [role , setRole] = useState('none');
+
   function generateID(number) {
     if (number?.toString() === 2) {
       return `P00${number + 1}`;
@@ -57,6 +60,18 @@ const DataPengguna = (props) => {
       );
     }
   };
+
+  useEffect(() => {
+
+    try{
+      const data = localStorage.getItem('token');
+      const decoded = jwt_decode(data);
+      setRole(decoded.role);
+    }catch(error){
+      swal('Failed','session habis','warning')
+    }
+
+  },[])
 
   return (
     <>
@@ -129,7 +144,15 @@ const DataPengguna = (props) => {
                         <label>Role</label>
                         <select {...register("role", { required: true })} className="form-control">
                           <option>Pilih</option>
-                          <option value={'petugas'}>Petugas</option>
+                          {
+                            role === 'admin'?
+                           <>
+                            <option value={'petugas'}>Petugas</option>
+                            <option value={'admin'}>Admin</option>
+                           </>:
+                            <option value={'petugas'}>Petugas</option>
+                          }
+                         
                           {/* <option>Perempuan</option> */}
                         </select>
                         {errors.role && <p>role is required.</p>}

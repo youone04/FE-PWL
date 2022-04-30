@@ -2,21 +2,21 @@ import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import jwt_decode from "jwt-decode";
 import { useEffect, useState } from "react";
-
+import { Collapse } from "react-bootstrap";
 const Menu = () => {
-  const [username , setUserName] = useState('none');
-  useEffect(() => {
+  const [username, setUserName] = useState("none");
+  const [open, setOpen] = useState(false);
 
-    try{
-      const data = localStorage.getItem('token');
+  useEffect(() => {
+    try {
+      const data = localStorage.getItem("token");
       const decoded = jwt_decode(data);
       setUserName(decoded.username);
-    }catch(error){
-      alert(error)
+    } catch (error) {
+      alert(error);
     }
+  }, []);
 
-  },[])
-  
   const Navigate = useNavigate();
   const handleLogout = () => {
     swal({
@@ -69,8 +69,34 @@ const Menu = () => {
                 </ul>
               </li>
 
+             
+                 {/* <a  onClick={() => setOpen(!open)} href="#" className="nav-link">
+                  <i className="nav-icon fas fa-chart-pie mr-2" />
+                  <p>
+                    Kelola Data
+                    <i className="right fas fa-angle-left"/>
+                  </p>
+                </a>
+                
+              <Collapse in={open}>
+                <ul className="nav nav-treeviews">
+                  <li className="nav-item">
+                    <Link to="/manage-buku" className="nav-link">
+                      <i className="far fa-circle nav-icon mr-1" />
+                      <p>Buku</p>
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/manage-anggota" className="nav-link">
+                      <i className="far fa-circle nav-icon mr-1" />
+                      <p>Anggota</p>
+                    </Link>
+                  </li>
+                </ul>
+              </Collapse> */}
+
               <li className="nav-item">
-                <a href="#!" className="nav-link">
+                <a href="#" className="nav-link">
                   <i className="nav-icon fas fa-chart-pie" />
                   <p>
                     Kelola Data
@@ -92,6 +118,7 @@ const Menu = () => {
                   </li>
                 </ul>
               </li>
+
               <li className="nav-item">
                 <Link to="/manage-transaksi" className="nav-link">
                   <i className="nav-icon fas fa-tree" />

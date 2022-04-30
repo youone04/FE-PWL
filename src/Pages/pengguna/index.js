@@ -29,7 +29,6 @@ const Pengguna = () => {
       const data = localStorage.getItem('token');
       const decoded = jwt_decode(data);
       setUserName(decoded.username);
-      console.log(decoded)
       setRole(decoded.role);
     }catch(error){
       alert(error)

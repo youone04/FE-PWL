@@ -2,12 +2,13 @@ import { useForm } from "react-hook-form";
 import swal from "sweetalert";
 import { useNavigate ,useLocation } from "react-router-dom";
 import jwt_decode from "jwt-decode";
-import { useEffect } from "react";
+import { useEffect , useState } from "react";
 
 const EditPengguna = () => {
   const { state } = useLocation();
   const { id, username, role , password } = state;  
   const navigate = useNavigate();
+  const [roles , setRole] = useState('none');
 
   useEffect(() => {
     try{
@@ -17,7 +18,7 @@ const EditPengguna = () => {
         navigate('/pengguna')
       }
     }catch(error){
-      alert(error)
+     swal('Failed','session habis','warning')
     }
 
   },[])
@@ -69,6 +70,18 @@ const EditPengguna = () => {
       );
     }
   };
+
+  useEffect(() => {
+
+    try{
+      const data = localStorage.getItem('token');
+      const decoded = jwt_decode(data);
+      setRole(decoded.role);
+    }catch(error){
+      alert(error)
+    }
+
+  },[])
 
   return (
     <>
@@ -140,9 +153,14 @@ const EditPengguna = () => {
                       <div className="form-group">
                         <label>Role</label>
                         <select {...register("role", { required: true })} className="form-control">
-                          <option>Pilih</option>
-                          <option value={'petugas'}>Petugas</option>
-                          {/* <option>Perempuan</option> */}
+                        {
+                            roles === 'admin'?
+                           <>
+                            <option value={'petugas'}>Petugas</option>
+                            <option value={'admin'}>Admin</option>
+                           </>:
+                            <option value={'petugas'}>Petugas</option>
+                          }
                         </select>
                         {errors.role && <p>role is required.</p>}
                       </div>
