@@ -35,7 +35,7 @@ const Menu = () => {
 
   return (
     <>
-      <aside className="main-sidebar sidebar-dark-primary elevation-4">
+      <aside className="main-sidebar elevation-4" style={{backgroundColor:'#00588A'}}>
         <div className="sidebar">
           <div className="user-panel mt-3 pb-3 mb-3 d-flex">
             <div className="image">
@@ -46,7 +46,7 @@ const Menu = () => {
               />
             </div>
             <div className="info">
-              <Link to="/dashboard" className="d-block">
+              <Link style={{color:'white',textDecoration:'none'}} to="/dashboard" className="d-block">
                 {username}
               </Link>
             </div>
@@ -63,7 +63,7 @@ const Menu = () => {
                 <ul className="nav nav-treeview">
                   <li className="nav-item">
                     <Link to="/dashboard" className="nav-link active">
-                      <p>Dashboard</p>
+                      <p style={{color:'white'}}>Dashboard</p>
                     </Link>
                   </li>
                 </ul>
@@ -97,21 +97,21 @@ const Menu = () => {
 
               <li className="nav-item">
                 <a href="#" className="nav-link">
-                  <i className="nav-icon fas fa-chart-pie" />
-                  <p>
+                  <i style={{color:'white'}} className="nav-icon fas fa-chart-pie" />
+                  <p style={{color:'white'}}>
                     Kelola Data
                     <i className="right fas fa-angle-left" />
                   </p>
                 </a>
                 <ul className="nav nav-treeview">
-                  <li className="nav-item">
-                    <Link to="/manage-buku" className="nav-link">
+                  <li style={{color:'white'}} className="nav-item">
+                    <Link style={{color:'white'}} to="/manage-buku" className="nav-link">
                       <i className="far fa-circle nav-icon" />
                       <p>Buku</p>
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link to="/manage-anggota" className="nav-link">
+                    <Link style={{color:'white'}} to="/manage-anggota" className="nav-link">
                       <i className="far fa-circle nav-icon" />
                       <p>Anggota</p>
                     </Link>
@@ -121,12 +121,12 @@ const Menu = () => {
 
               <li className="nav-item">
                 <Link to="/manage-transaksi" className="nav-link">
-                  <i className="nav-icon fas fa-tree" />
-                  <p>Sirkulasi</p>
+                  <i style={{color:'white'}} className="nav-icon fas fa-tree" />
+                  <p style={{color:'white'}}>Sirkulasi</p>
                 </Link>
               </li>
               <li className="nav-item">
-                <a href="#!" className="nav-link">
+                <a style={{color:'white'}} href="#!" className="nav-link">
                   <i className="nav-icon fas fa-edit" />
                   <p>
                     Log Data
@@ -136,22 +136,22 @@ const Menu = () => {
                 <ul className="nav nav-treeview">
                   <li className="nav-item">
                     <Link to="/log-peminjaman" className="nav-link">
-                      <i className="far fa-circle nav-icon" />
-                      <p>Log Peminjaman</p>
+                      <i style={{color:'white'}} className="far fa-circle nav-icon" />
+                      <p style={{color:'white'}}>Log Peminjaman</p>
                     </Link>
                   </li>
                   <li className="nav-item">
                     <Link to="/log-pengembalian" className="nav-link">
-                      <i className="far fa-circle nav-icon" />
-                      <p>Log Pengembalian</p>
+                      <i style={{color:'white'}} className="far fa-circle nav-icon" />
+                      <p style={{color:'white'}}>Log Pengembalian</p>
                     </Link>
                   </li>
                 </ul>
               </li>
               <li className="nav-item">
                 <a href="#!!" className="nav-link">
-                  <i className="nav-icon fas fa-table" />
-                  <p>
+                  <i style={{color:'white'}} className="nav-icon fas fa-table" />
+                  <p style={{color:'white'}}>
                     Laporan
                     <i className="fas fa-angle-left right" />
                   </p>
@@ -177,11 +177,11 @@ const Menu = () => {
                   </li>
                 </ul>
               </li>
-              <li className="nav-header">Lainnya</li>
+              <li className="nav-header" style={{color:'white'}}>Lainnya</li>
               <li className="nav-item">
                 <Link to="/pengguna" className="nav-link">
-                  <i className="nav-icon far fa-calendar-alt" />
-                  <p>Pengguna System</p>
+                  <i style={{color:'white'}} className="nav-icon far fa-calendar-alt" />
+                  <p style={{color:'white'}}>Pengguna System</p>
                 </Link>
               </li>
               <li className="nav-item">

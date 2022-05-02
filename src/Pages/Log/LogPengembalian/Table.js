@@ -117,7 +117,6 @@ const Table = (props) => {
                             <td style={{ width: "25%" }}>
                             Rp.{" "}{numberWithCommas(transaksi.denda)}
                             </td>
-                            <td>{transaksi.jumlah_perpanjang}</td>
                           </tr>
                         );
                       })}

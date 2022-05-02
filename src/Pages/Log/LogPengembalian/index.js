@@ -38,7 +38,6 @@ const LogPengembalian = () => {
         </div>
       ) : (
         <Table
-        
           title="Manage Log Pengembalian"
           data={data.data}
           denda={data.total_denda}
