@@ -70,10 +70,10 @@ const Table = (props) => {
                     <option value={25}>25</option>
                   </select>
 
-                  <div className="card-tools">
+                  <div className="card-tools col-sm-12 col-lg-2 mt-2">
                     <div
                       className="input-group input-group-sm"
-                      style={{ width: 150 }}
+                      style={{ width: '100%' }}
                     >
                       <input
                         type="text"

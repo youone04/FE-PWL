@@ -23,8 +23,7 @@ const TambahTransaksi = () => {
     dispatch(getPeminjam("",0,dataAnggota?.data?.length));
     dispatch(auth());
   }, [dispatch]);
-
-
+  
   return (
     <>
       {loading || loadingBuku || loadingAnggota ? (
@@ -38,7 +37,7 @@ const TambahTransaksi = () => {
       ) : (
         <DataTransaksi 
         data={data.data}
-        count={data.count.count}
+        count={data.lengthAll.count}
         dataBuku={dataBuku.data}
         dataAnggota={dataAnggota.data}
          />

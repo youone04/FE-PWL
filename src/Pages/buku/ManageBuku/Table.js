@@ -72,10 +72,10 @@ const Table = (props) => {
                     <option value={25}>25</option>
                   </select>
 
-                  <div className="card-tools">
+                  <div className="card-tools col-sm-12 col-lg-2 mt-2">
                     <div
                       className="input-group input-group-sm"
-                      style={{ width: 150 }}
+                      style={{ width: '100%' }}
                     >
                       <input
                         type="text"
@@ -92,7 +92,7 @@ const Table = (props) => {
                     </div>
                   </div>
                 </div>
-                <div className="card-body">
+                <div className="card-body table-responsive">
                   {
                     props.loading?<p>loading</p>:
                     <table
@@ -135,7 +135,7 @@ const Table = (props) => {
                               <button
                                 onClick={() => props.handleDelete(books.id)}
                                 type="button"
-                                className="btn btn-danger ml-2"
+                                className="btn btn-danger m-2"
                               >
                                 <i className="fas fa-trash"></i> delete
                               </button>

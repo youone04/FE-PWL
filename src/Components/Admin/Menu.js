@@ -6,6 +6,8 @@ import { Collapse } from "react-bootstrap";
 const Menu = () => {
   const [username, setUserName] = useState("none");
   const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
+  const [open3, setOpen3] = useState(false);
 
   useEffect(() => {
     try {
@@ -70,54 +72,30 @@ const Menu = () => {
               </li>
 
              
-                 {/* <a  onClick={() => setOpen(!open)} href="#" className="nav-link">
-                  <i className="nav-icon fas fa-chart-pie mr-2" />
-                  <p>
+                 <a  style={{color:'white'}} onClick={() => setOpen(!open)} href="#" className="nav-link">
+                  <i  style={{color:'white'}} className="nav-icon fas fa-chart-pie mr-2" />
+                  <p  style={{color:'white',marginRight: 80}}>
                     Kelola Data
-                    <i className="right fas fa-angle-left"/>
-                  </p>
+                  </p>   
+                  <i style={open?{transform:'rotate(-90deg)'}:{transform:'rotate(0deg)'}} className="fas fa-angle-left"></i>
                 </a>
-                
               <Collapse in={open}>
                 <ul className="nav nav-treeviews">
                   <li className="nav-item">
                     <Link to="/manage-buku" className="nav-link">
-                      <i className="far fa-circle nav-icon mr-1" />
-                      <p>Buku</p>
+                      <i  style={{color:'white'}} className="far fa-circle nav-icon mr-1" />
+                      <p  style={{color:'white'}}>Buku</p>
                     </Link>
                   </li>
                   <li className="nav-item">
                     <Link to="/manage-anggota" className="nav-link">
-                      <i className="far fa-circle nav-icon mr-1" />
-                      <p>Anggota</p>
+                      <i  style={{color:'white'}} className="far fa-circle nav-icon mr-1" />
+                      <p  style={{color:'white'}}>Anggota</p>
                     </Link>
                   </li>
                 </ul>
-              </Collapse> */}
+              </Collapse>
 
-              <li className="nav-item">
-                <a href="#" className="nav-link">
-                  <i style={{color:'white'}} className="nav-icon fas fa-chart-pie" />
-                  <p style={{color:'white'}}>
-                    Kelola Data
-                    <i className="right fas fa-angle-left" />
-                  </p>
-                </a>
-                <ul className="nav nav-treeview">
-                  <li style={{color:'white'}} className="nav-item">
-                    <Link style={{color:'white'}} to="/manage-buku" className="nav-link">
-                      <i className="far fa-circle nav-icon" />
-                      <p>Buku</p>
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link style={{color:'white'}} to="/manage-anggota" className="nav-link">
-                      <i className="far fa-circle nav-icon" />
-                      <p>Anggota</p>
-                    </Link>
-                  </li>
-                </ul>
-              </li>
 
               <li className="nav-item">
                 <Link to="/manage-transaksi" className="nav-link">
@@ -126,14 +104,15 @@ const Menu = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <a style={{color:'white'}} href="#!" className="nav-link">
+                <a  onClick={() => setOpen2(!open2)} style={{color:'white'}} href="#!" className="nav-link">
                   <i className="nav-icon fas fa-edit" />
                   <p>
                     Log Data
-                    <i className="fas fa-angle-left right" />
+                    <i  style={open2?{transform:'rotate(-90deg)'}:{transform:'rotate(0deg)'}}  className="fas fa-angle-left right" />
                   </p>
                 </a>
-                <ul className="nav nav-treeview">
+                <Collapse in={open2}>
+                <ul className="nav nav-treeviews">
                   <li className="nav-item">
                     <Link to="/log-peminjaman" className="nav-link">
                       <i style={{color:'white'}} className="far fa-circle nav-icon" />
@@ -147,35 +126,39 @@ const Menu = () => {
                     </Link>
                   </li>
                 </ul>
+                </Collapse>
               </li>
+
               <li className="nav-item">
-                <a href="#!!" className="nav-link">
+                <a  onClick={() => setOpen3(!open3)} href="#!!" className="nav-link">
                   <i style={{color:'white'}} className="nav-icon fas fa-table" />
                   <p style={{color:'white'}}>
                     Laporan
-                    <i className="fas fa-angle-left right" />
+                    <i style={open3?{transform:'rotate(-90deg)'}:{transform:'rotate(0deg)'}}  className="fas fa-angle-left right" />
                   </p>
                 </a>
-                <ul className="nav nav-treeview">
+                <Collapse in={open3}>
+                <ul className="nav nav-treeviews">
                   <li className="nav-item">
                     <a href="pages/tables/simple.html" className="nav-link">
                       <i className="far fa-circle nav-icon" />
-                      <p>Simple Tables</p>
+                      <p style={{color:'white'}}>Laporan Peminjaman</p>
                     </a>
                   </li>
                   <li className="nav-item">
                     <a href="pages/tables/data.html" className="nav-link">
                       <i className="far fa-circle nav-icon" />
-                      <p>DataTables</p>
+                      <p style={{color:'white'}}>Laporan Pengembalian</p>
                     </a>
                   </li>
                   <li className="nav-item">
                     <a href="pages/tables/jsgrid.html" className="nav-link">
                       <i className="far fa-circle nav-icon" />
-                      <p>jsGrid</p>
+                      <p style={{color:'white'}}>Laporan Denda</p>
                     </a>
                   </li>
                 </ul>
+                </Collapse>
               </li>
               <li className="nav-header" style={{color:'white'}}>Lainnya</li>
               <li className="nav-item">

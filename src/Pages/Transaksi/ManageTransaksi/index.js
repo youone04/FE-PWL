@@ -171,7 +171,7 @@ const ManageTransaksi = () => {
           handlePerpanjang={handlePerpanjang}
 
           data={data.data}
-          dataLength={data.count.count}
+          dataLength={data.count}
           limit={limit}
           setOffset={setOffset}
           offset={offset}

@@ -52,15 +52,16 @@ const Table = (props) => {
         <div className="container-fluid">
           <div className="row">
             <div className="col-12">
-              {
-                props.role === 'admin'?
+              {props.role === "admin" ? (
                 <button
-                onClick={() => navigate(`/${props.tambah}`)}
-                className="btn btn-primary mb-3"
-              >
-                + TAMBAH
-              </button>:''
-              }
+                  onClick={() => navigate(`/${props.tambah}`)}
+                  className="btn btn-primary mb-3"
+                >
+                  + TAMBAH
+                </button>
+              ) : (
+                ""
+              )}
               <div className="card">
                 <div className="card-header">
                   {/* <button className="btn btn-primary mb-3">+ TAMBAH</button> */}
@@ -68,7 +69,7 @@ const Table = (props) => {
                     className="form-control col-lg-2"
                     style={{ display: "inline-block" }}
                     id="exampleFormControlSelect1"
-                    onChange={(e)=> props.handleLimit(e)}
+                    onChange={(e) => props.handleLimit(e)}
                   >
                     <option value={5}>5</option>
                     <option value={10}>10</option>
@@ -77,10 +78,10 @@ const Table = (props) => {
                     <option value={25}>25</option>
                   </select>
 
-                  <div className="card-tools">
+                  <div className="card-tools col-sm-12 col-lg-2 mt-2">
                     <div
                       className="input-group input-group-sm"
-                      style={{ width: 150 }}
+                      style={{ width: '100%' }}
                     >
                       <input
                         type="text"
@@ -108,11 +109,7 @@ const Table = (props) => {
                         <th>ID Admin</th>
                         <th>Nama</th>
                         <th>Role</th>
-                        {
-                          props.role==='admin'?
-                          <th>Aksi</th>:''
-                        }
-                       
+                        {props.role === "admin" ? <th>Aksi</th> : ""}
                       </tr>
                     </thead>
                     <tbody className="text-center">
@@ -121,36 +118,41 @@ const Table = (props) => {
                           <tr key={i}>
                             <td>{i + itemFirst}</td>
                             <td>{admin.id}</td>
-                            <td>{admin.username===props.username?`${admin.username} (anda)`:admin.username}</td>
+                            <td>
+                              {admin.username === props.username
+                                ? `${admin.username} (anda)`
+                                : admin.username}
+                            </td>
                             <td>{admin.role}</td>
-                            {
-                              props.role==='admin'?
+                            {props.role === "admin" ? (
                               <td style={{ width: "33%", textAlign: "center" }}>
-                              <button
-                                className="btn btn-success"
-                                type="button"
-                                onClick={() =>
-                                  navigate("/edit-pengguna", {
-                                    state: {
-                                      id: admin.id,
-                                      username: admin.username,
-                                      role: admin.role,
-                                      password: admin.password
-                                    },
-                                  })}
-                              >
-                          edit
-                              </button>
-                              <button
-                                onClick={() => props.handleDelete(admin.id)}
-                                type="button"
-                                className="btn btn-danger ml-2"
-                              >
-                               hapus
-                              </button>
-                            </td>:''
-                            }
-                           
+                                <button
+                                  className="btn btn-success"
+                                  type="button"
+                                  onClick={() =>
+                                    navigate("/edit-pengguna", {
+                                      state: {
+                                        id: admin.id,
+                                        username: admin.username,
+                                        role: admin.role,
+                                        password: admin.password,
+                                      },
+                                    })
+                                  }
+                                >
+                                 <i className="fas fa-edit"></i>  edit
+                                </button>
+                                <button
+                                  onClick={() => props.handleDelete(admin.id)}
+                                  type="button"
+                                  className="btn btn-danger m-2"
+                                >
+                                  <i className="fas fa-trash"></i>  hapus
+                                </button>
+                              </td>
+                            ) : (
+                              ""
+                            )}
                           </tr>
                         );
                       })}
