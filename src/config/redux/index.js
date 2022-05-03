@@ -8,6 +8,7 @@ import { reducerLogPeminjaman } from "./reducers/reduceLogPeminjaman";
 import { reducerLogPengembalian } from "./reducers/reducerPengembalian";
 import { reducerDashboard } from "./reducers/reducerDashboard";
 import { reducerAdmin } from "./reducers/reducerAdmin";
+import { reducerLaporanDenda } from "./reducers/reducerLaporanDenda";
 
 const reducer = combineReducers({
   authUser: authReducer,
@@ -17,7 +18,8 @@ const reducer = combineReducers({
   log_pinjam: reducerLogPeminjaman,
   log_pengembalian: reducerLogPengembalian,
   dashboard : reducerDashboard,
-  admin: reducerAdmin
+  admin: reducerAdmin,
+  laporan_denda: reducerLaporanDenda
 });
 
 export const store = createStore(reducer, applyMiddleware(thunk));

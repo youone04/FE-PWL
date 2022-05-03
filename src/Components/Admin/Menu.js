@@ -140,22 +140,10 @@ const Menu = () => {
                 <Collapse in={open3}>
                 <ul className="nav nav-treeviews">
                   <li className="nav-item">
-                    <a href="pages/tables/simple.html" className="nav-link">
-                      <i className="far fa-circle nav-icon" />
-                      <p style={{color:'white'}}>Laporan Peminjaman</p>
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a href="pages/tables/data.html" className="nav-link">
-                      <i className="far fa-circle nav-icon" />
-                      <p style={{color:'white'}}>Laporan Pengembalian</p>
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a href="pages/tables/jsgrid.html" className="nav-link">
+                    <Link to="/laporan-denda" className="nav-link">
                       <i className="far fa-circle nav-icon" />
                       <p style={{color:'white'}}>Laporan Denda</p>
-                    </a>
+                    </Link>
                   </li>
                 </ul>
                 </Collapse>

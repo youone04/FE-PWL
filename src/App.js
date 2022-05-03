@@ -20,6 +20,7 @@ import LogPengembalian from "./Pages/Log/LogPengembalian";
 import Pengguna from "./Pages/pengguna";
 import TambahPengguna from "./Pages/pengguna/TambahPengguna";
 import EditPengguna from "./Pages/pengguna/EditPengguna";
+import LaporanDenda from "./Pages/Laporan/LaporanDenda";
 function App() {
   const location = useLocation();
   const position = location.pathname !== "/";
@@ -54,6 +55,8 @@ function App() {
           <Route exact path="/pengguna" element={<Pengguna />} />
           <Route exact path="/tambah-pengguna" element={<TambahPengguna />} />
           <Route exact path="/edit-pengguna" element={<EditPengguna />} />
+
+          <Route exact path="/laporan-denda" element={<LaporanDenda />} />
         </Route>
       </Routes>
       {position && <Footer />}
