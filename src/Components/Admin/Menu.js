@@ -72,7 +72,7 @@ const Menu = () => {
               </li>
 
              
-                 <a  style={{color:'white'}} onClick={() => setOpen(!open)} href="#" className="nav-link">
+                 <a  style={{color:'white'}} onClick={() => setOpen(!open)} href="#!" className="nav-link">
                   <i  style={{color:'white'}} className="nav-icon fas fa-chart-pie mr-2" />
                   <p  style={{color:'white',marginRight: 80}}>
                     Kelola Data
