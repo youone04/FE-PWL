@@ -21,7 +21,7 @@ const EditPengguna = () => {
      swal('Failed','session habis','warning')
     }
 
-  },[])
+  },[navigate])
 
   const {
     register,

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import moment from "moment";
-import "moment/locale/id";
+// import moment from "moment";
+// import "moment/locale/id";
 import ReactPaginate from "react-paginate";
 import { useEffect, useState } from "react";
 
@@ -17,7 +17,7 @@ const Table = (props) => {
       setPageCount(Math.ceil(props.dataLength / props.limit));
     };
     setPagination();
-  }, [props.offset, props.data, props.dataLength]);
+  }, [props.offset, props.data, props.dataLength,props.limit]);
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * props.limit) % props.dataLength;

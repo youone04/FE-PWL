@@ -6,7 +6,7 @@ import DataBuku from "./DataBuku";
 const TambahBuku = () => {
   const buku = useSelector((state) => state.buku);
   const dispatch = useDispatch();
-  const {data ,loading, error } = buku.dataBuku;
+  const {data ,loading } = buku.dataBuku;
 
   useEffect(() => {
       dispatch(getBuku("",5,0));

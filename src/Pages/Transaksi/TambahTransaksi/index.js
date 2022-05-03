@@ -22,7 +22,7 @@ const TambahTransaksi = () => {
     dispatch(getBuku("",0,dataBuku?.data?.length));
     dispatch(getPeminjam("",0,dataAnggota?.data?.length));
     dispatch(auth());
-  }, [dispatch]);
+  }, [dispatch,data?.data?.length,dataBuku?.data?.length,dataAnggota?.data?.length]);
   
   return (
     <>

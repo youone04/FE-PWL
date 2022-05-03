@@ -16,7 +16,7 @@ const TambahPengguna = () => {
     // "",0,data?.data?.length
     dispatch(getAdmin("",0,5));
     dispatch(auth());
-  }, [dispatch]);
+  }, [dispatch,Navigate]);
 
   useEffect(() => {
     try{
@@ -29,7 +29,7 @@ const TambahPengguna = () => {
       swal('Failed','session habis','warning')
     }
 
-  },[])
+  },[Navigate])
 
   return (
     <>

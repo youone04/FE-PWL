@@ -18,7 +18,7 @@ const EditBuku = () => {
   useEffect(() => {
     setValue("nama_buku", nama_buku);
     setValue("jumlah_buku", jumlah_buku);
-  }, []);
+  }, [jumlah_buku,nama_buku,setValue]);
 
   const onSubmit = async (data) => {
     const dataSend = {
@@ -63,7 +63,7 @@ const EditBuku = () => {
               <div className="col-sm-6">
                 <ol className="breadcrumb float-sm-right">
                   <li className="breadcrumb-item">
-                    <a href="#">Home</a>
+                    <a href="#!">Home</a>
                   </li>
                   <li className="breadcrumb-item active">Tambah Bukuu</li>
                 </ol>

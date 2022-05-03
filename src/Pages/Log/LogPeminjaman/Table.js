@@ -16,7 +16,7 @@ const Table = (props) => {
       setPageCount(Math.ceil(props.dataLength / props.limit));
     };
     setPagination();
-  }, [props.offset, props.data, props.dataLength]);
+  }, [props.offset, props.data, props.dataLength,props.limit]);
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * props.limit) % props.dataLength;
